@@ -59,6 +59,11 @@ func (s *SearchAPI) Get() {
 		}
 		projects = result.Projects
 	} else {
+		cur := config.DisableAnonymous()
+		if cur {
+			s.SendInternalServerError("unauthorized to get projects")
+			return
+		}
 		projects, err = s.ProjectMgr.GetPublic()
 		if err != nil {
 			s.ParseAndHandleError("failed to get projects", err)
