@@ -118,6 +118,12 @@ func (sia *SystemInfoAPI) GetCert() {
 
 // GetGeneralInfo returns the general system info, which is to be called by anonymous user
 func (sia *SystemInfoAPI) GetGeneralInfo() {
+	cur := config.DisableAnonymous()
+	if cur {
+		// return empty if anonymos access is disabled
+		return
+	}
+
 	cfg, err := config.GetSystemCfg()
 	if err != nil {
 		log.Errorf("Error occurred getting config: %v", err)
