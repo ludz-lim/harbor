@@ -61,7 +61,7 @@ func (s *SearchAPI) Get() {
 	} else {
 		cur := config.DisableAnonymous()
 		if cur {
-			s.SendInternalServerError("unauthorized to get projects")
+			// return empty if anonymos access is disabled
 			return
 		}
 		projects, err = s.ProjectMgr.GetPublic()
