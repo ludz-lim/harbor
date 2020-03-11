@@ -60,7 +60,7 @@ func (s *SearchAPI) Get() {
 		projects = result.Projects
 	} else {
 		cur := config.DisableAnonymous()
-		if cur {
+		if !isAuthenticated && cur {
 			// return empty if anonymos access is disabled
 			return
 		}
