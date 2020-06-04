@@ -802,6 +802,7 @@
         "LABEL": "Labels",
         "REPOSITORY": "Repository",
         "REPO_READ_ONLY": "Repository Read Only",
+        "DISABLE_ANONYMOUS": "Deshabilitar usuario anónima",
         "SYSTEM": "Opciones del Sistema",
         "PROJECT_QUOTAS": "Project Quotas",
         "VULNERABILITY": "Vulnerability",

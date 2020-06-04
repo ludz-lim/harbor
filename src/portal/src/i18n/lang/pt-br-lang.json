@@ -798,6 +798,7 @@
         "LABEL": "Labels",
         "REPOSITORY": "Repositório",
         "REPO_READ_ONLY": "Repositório somente leitura",
+        "DISABLE_ANONYMOUS": "desativar usuário anônimo",
         "SYSTEM": "Configurações do Sistema",
         "PROJECT_QUOTAS": "Project Quotas",
         "VULNERABILITY": "Vulnerabilidade",

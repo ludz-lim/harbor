@@ -385,6 +385,11 @@ func (p *ProjectAPI) List() {
 	var projects []*models.Project
 	if !p.SecurityCtx.IsAuthenticated() {
 		// not login, only get public projects
+		cur := config.DisableAnonymous()
+		if cur {
+			p.SendUnAuthorizedError(errors.New("Unauthorized"))
+			return
+		}
 		pros, err := p.ProjectMgr.GetPublic()
 		if err != nil {
 			p.SendInternalServerError(fmt.Errorf("failed to get public projects: %v", err))

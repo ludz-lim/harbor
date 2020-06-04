@@ -49,6 +49,7 @@ export class SystemSettingsComponent implements OnChanges, OnInit {
     systemInfo: SystemInfo;
     @Output() configChange: EventEmitter<Configuration> = new EventEmitter<Configuration>();
     @Output() readOnlyChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() disableAnonymousChange: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output() reloadSystemConfig: EventEmitter<any> = new EventEmitter<any>();
 
     @Input()
@@ -108,7 +109,7 @@ export class SystemSettingsComponent implements OnChanges, OnInit {
         let changes = {};
         for (let prop in allChanges) {
             if (prop === 'token_expiration' || prop === 'read_only' || prop === 'project_creation_restriction'
-                || prop === 'robot_token_duration' || prop === 'notification_enable') {
+                || prop === 'robot_token_duration' || prop === 'notification_enable' || prop === 'disable_anonymous') {
                 changes[prop] = allChanges[prop];
             }
         }
@@ -119,6 +120,10 @@ export class SystemSettingsComponent implements OnChanges, OnInit {
         this.systemSettings.read_only.value = $event;
     }
 
+    setDisableAnonymousValue($event: any) {
+        this.systemSettings.disable_anonymous.value = $event;
+    }
+    
     setWebhookNotificationEnabledValue($event: any) {
         this.systemSettings.notification_enable.value = $event;
     }
@@ -159,6 +164,10 @@ export class SystemSettingsComponent implements OnChanges, OnInit {
                     this.retrieveConfig();
                     if ('read_only' in changes) {
                         this.readOnlyChange.emit(changes['read_only']);
+                    }
+
+                    if ('disable_anonymous' in changes) {
+                        this.disableAnonymousChange.emit(changes['disable_anonymous']);
                     }
 
                     this.reloadSystemConfig.emit();
