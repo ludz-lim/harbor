@@ -64,7 +64,7 @@ func (s *SearchAPI) Get() {
 		projects = result.Projects
 	} else {
 		cur := config.DisableAnonymous()
-		if !isAuthenticated && cur {
+		if !s.SecurityCtx.IsAuthenticated() && cur {
 			// return empty if anonymos access is disabled
 			return
 		}
