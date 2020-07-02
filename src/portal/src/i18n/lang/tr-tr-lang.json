@@ -802,6 +802,7 @@
         "LABEL": "Etiketler",
         "REPOSITORY": "Depo",
         "REPO_READ_ONLY": "Depo Salt Okunur",
+        "DISABLE_ANONYMOUS": "anonim kullanıcıyı devre dışı bırak",
         "WEBHOOK_NOTIFICATION_ENABLED": "Ağ Kancaları Aktif Halde",
         "SYSTEM": "Sistem Ayarları",
         "PROJECT_QUOTAS": "Proje Kotaları",

@@ -383,6 +383,11 @@ func ReadOnly() bool {
 	return cfgMgr.Get(common.ReadOnly).GetBool()
 }
 
+// DisableAnonymous returns a bool to indicates if anonymous user is disabled.
+func DisableAnonymous() bool {
+	return cfgMgr.Get(common.DisableAnonymous).GetBool()
+}
+
 // WithChartMuseum returns a bool to indicate if chartmuseum is deployed with Harbor.
 func WithChartMuseum() bool {
 	return cfgMgr.Get(common.WithChartMuseum).GetBool()
