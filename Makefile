@@ -90,7 +90,7 @@ GEN_TLS=
 # for docker image tag
 VERSIONTAG=dev
 # for base docker image tag
-BASEIMAGETAG=dev
+BASEIMAGETAG=v2.0.1
 BASEIMAGENAMESPACE=goharbor
 # for harbor package name
 PKGVERSIONTAG=dev
