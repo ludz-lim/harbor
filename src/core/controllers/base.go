@@ -119,7 +119,7 @@ func (cc *CommonController) Login() {
 // LogOut Habor UI
 func (cc *CommonController) LogOut() {
 	cc.DestroySession()
-	cc.Ctx.SetCookie("HPIUID", "", 0, "/", ".hp.com")
+	cc.Ctx.SetCookie("HPIUID", "", 0, "/", "hp.com")
 }
 
 // UserExists checks if user exists when user input value in sign in form.
