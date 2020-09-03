@@ -101,6 +101,14 @@ func (cc *CommonController) Login() {
 		return
 	}
 
+	hpNetwork := "15.0.0.0/9"
+	_, subnet, _ := net.ParseCIDR(hpNetwork)
+	comingIP := cc.Ctx.Request.RemoteAddr
+	if !subnet.Contains(comingIP) {
+		cc.CustomAbort(http.StatusUnauthorized, "")
+		return
+	}
+
 	user, err := auth.Login(models.AuthModel{
 		Principal: principal,
 		Password:  password,
