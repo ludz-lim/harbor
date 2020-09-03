@@ -103,6 +103,7 @@ func (cc *CommonController) Login() {
 
 	hpNetwork := "15.0.0.0/9"
 	_, subnet, _ := net.ParseCIDR(hpNetwork)
+	log.Infof("Client IP: %s", cc.Ctx.Request.RemoteAddr)
 	clientip := net.ParseIP(cc.Ctx.Request.RemoteAddr)
 	if !subnet.Contains(clientip) {
 		cc.CustomAbort(http.StatusUnauthorized, "")
