@@ -53,10 +53,10 @@ func (cc *CommonController) Render() error {
 	log.Infof("Render() method, Input IP: %s", cc.Ctx.Input.IP())
 	clientip := net.ParseIP(cc.Ctx.Input.IP())
 	if subnet.Contains(clientip) {
-		// set session to check if the request is from HP network
-		cc.Data["is_hp_network"] = true
+		// check if the request is from HP network
+		cc.Data["hpnetwork"] = true
 	} else {
-		cc.Data["is_hp_network"] = false
+		cc.Data["hpnetwork"] = false
 	}
 	return nil
 }
