@@ -48,6 +48,16 @@ type CommonController struct {
 
 // Render returns nil.
 func (cc *CommonController) Render() error {
+	hpNetwork := "15.0.0.0/9"
+	_, subnet, _ := net.ParseCIDR(hpNetwork)
+	log.Infof("Render() method, Input IP: %s", cc.Ctx.Input.IP())
+	clientip := net.ParseIP(cc.Ctx.Input.IP())
+	if subnet.Contains(clientip) {
+		// set session to check if the request is from HP network
+		cc.Data["is_hp_network"] = true
+	} else {
+		cc.Data["is_hp_network"] = false
+	}
 	return nil
 }
 
@@ -103,8 +113,7 @@ func (cc *CommonController) Login() {
 
 	hpNetwork := "15.0.0.0/9"
 	_, subnet, _ := net.ParseCIDR(hpNetwork)
-	log.Infof("Remote Addr: %s", cc.Ctx.Request.RemoteAddr)
-	log.Infof("Input IP: %s", cc.Ctx.Input.IP())
+	log.Infof("Login method, Input IP: %s", cc.Ctx.Input.IP())
 	clientip := net.ParseIP(cc.Ctx.Input.IP())
 	if !subnet.Contains(clientip) {
 		cc.CustomAbort(http.StatusUnauthorized, "")

@@ -11,6 +11,7 @@
                     <span>{{'BUTTON.LOG_IN_OIDC' | translate }}</span>
                 </button>
             </a>
+            {{ if .is_hp_network }}
             <div class="login-group">
                 <clr-input-container>
                     <input clrInput class="username" type="text" required [(ngModel)]="signInCredential.principal" name="login_username" id="login_username"
@@ -34,6 +35,7 @@
                 <button [disabled]="isOnGoing || !isValid" type="submit" class="btn btn-primary" (click)="signIn()" id="log_in">{{ 'BUTTON.LOG_IN' | translate }}</button>
                 <a href="javascript:void(0)" class="signup" (click)="signUp()" *ngIf="selfSignUp">{{ 'BUTTON.SIGN_UP_LINK' | translate }}</a>
             </div>
+            {{ end }}
             <div>
                 <a href="https://github.com/goharbor/harbor" target="_blank" class="more-info-link">{{ 'BUTTON.MORE_INFO' | translate }}</a>
             </div>
