@@ -54,9 +54,9 @@ func (cc *CommonController) Render() error {
 	clientip := net.ParseIP(cc.Ctx.Input.IP())
 	if subnet.Contains(clientip) {
 		// check if the request is from HP network
-		cc.Data["NON_HP_NETWORK"] = ""
+		cc.Data["NON_HP_NETWORK"] = false
 	} else {
-		cc.Data["NON_HP_NETWORK"] = "hidden"
+		cc.Data["NON_HP_NETWORK"] = true
 	}
 	return nil
 }
