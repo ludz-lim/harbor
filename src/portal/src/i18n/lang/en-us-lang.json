@@ -24,7 +24,7 @@
         "OK": "OK",
         "DELETE": "DELETE",
         "LOG_IN": "LOG IN",
-        "LOG_IN_OIDC": "One-HP Unified ID",
+        "LOG_IN_OIDC": "Login With One-HP Unified ID",
         "SIGN_UP_LINK": "Sign up for an account",
         "SIGN_UP": "SIGN UP",
         "CONFIRM": "CONFIRM",
