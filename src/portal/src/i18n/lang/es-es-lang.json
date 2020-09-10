@@ -24,7 +24,7 @@
         "OK": "OK",
         "DELETE": "ELIMINAR",
         "LOG_IN": "IDENTIFICARSE",
-        "LOG_IN_OIDC": "Identificación unificada de One-HP",
+        "LOG_IN_OIDC": "Iniciar sesión con un ID unificado de HP",
         "SIGN_UP_LINK": "Registrar una cuenta",
         "SIGN_UP": "REGISTRARSE",
         "CONFIRM": "CONFIRMAR",
