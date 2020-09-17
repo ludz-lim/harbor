@@ -18,6 +18,7 @@ import (
 	pro "github.com/goharbor/harbor/src/common/dao/project"
 	"github.com/goharbor/harbor/src/common/models"
 	"github.com/goharbor/harbor/src/common/security"
+	"github.com/goharbor/harbor/src/core/config"
 	"github.com/goharbor/harbor/src/core/promgr"
 	"github.com/goharbor/harbor/src/lib/log"
 	"github.com/goharbor/harbor/src/pkg/permission/evaluator"
