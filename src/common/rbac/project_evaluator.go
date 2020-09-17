@@ -44,7 +44,7 @@ func NewProjectUserEvaluator(user *models.User, pm promgr.ProjectManager) evalua
 				return nil
 			}
 			return rbac.New(NewProjectRBACUser(project, user.Username, roles...))
-		} else if project.IsPublic() {
+		} else if project.IsPublic() && !config.DisableAnonymous() {
 			// anonymous access and the project is public
 			return rbac.New(NewProjectRBACUser(project, "anonymous"))
 		} else {
