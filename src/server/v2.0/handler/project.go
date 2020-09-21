@@ -397,7 +397,10 @@ func (a *projectAPI) ListProjects(ctx context.Context, params operation.ListProj
 			return operation.NewListProjectsOK().WithXTotalCount(0).WithPayload([]*models.Project{})
 		}
 		// force to return public projects for anonymous
-		query.Keywords["public"] = true
+		cur := config.DisableAnonymous()
+		if !cur {
+			query.Keywords["public"] = true
+		}
 	}
 
 	total, err := a.projectCtl.Count(ctx, query)

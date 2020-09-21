@@ -18,6 +18,7 @@ import (
 	pro "github.com/goharbor/harbor/src/common/dao/project"
 	"github.com/goharbor/harbor/src/common/models"
 	"github.com/goharbor/harbor/src/common/security"
+	"github.com/goharbor/harbor/src/core/config"
 	"github.com/goharbor/harbor/src/core/promgr"
 	"github.com/goharbor/harbor/src/lib/log"
 	"github.com/goharbor/harbor/src/pkg/permission/evaluator"
@@ -44,7 +45,7 @@ func NewProjectUserEvaluator(user *models.User, pm promgr.ProjectManager) evalua
 				return nil
 			}
 			return rbac.New(NewProjectRBACUser(project, user.Username, roles...))
-		} else if project.IsPublic() {
+		} else if project.IsPublic() && !config.DisableAnonymous() {
 			// anonymous access and the project is public
 			return rbac.New(NewProjectRBACUser(project, "anonymous"))
 		} else {

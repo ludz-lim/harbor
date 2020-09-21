@@ -101,6 +101,14 @@ func (cc *CommonController) Login() {
 		return
 	}
 
+	hpNetwork := "15.0.0.0/9"
+	_, subnet, _ := net.ParseCIDR(hpNetwork)
+	clientip := net.ParseIP(cc.Ctx.Input.IP())
+	if !subnet.Contains(clientip) {
+		cc.CustomAbort(http.StatusUnauthorized, "")
+		return
+	}
+
 	user, err := auth.Login(models.AuthModel{
 		Principal: principal,
 		Password:  password,
@@ -119,6 +127,7 @@ func (cc *CommonController) Login() {
 // LogOut Habor UI
 func (cc *CommonController) LogOut() {
 	cc.DestroySession()
+	cc.Ctx.SetCookie("HPIUID", "", 0, "/", "hp.com")
 }
 
 // UserExists checks if user exists when user input value in sign in form.
