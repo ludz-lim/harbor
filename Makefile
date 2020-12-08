@@ -79,7 +79,9 @@ NOTARYFLAG=false
 CLAIRFLAG=false
 TRIVYFLAG=false
 HTTPPROXY=
-BUILDBIN=false
+# BUILDBIN must be set to true as of now (Dec. 8, 2020) for us to use fargate
+# When BUILDBIN is set to true, it uses a pre-existing photon image which uses an AWS SDK that doesn't support AWS FARGATE
+BUILDBIN=true
 NPM_REGISTRY=https://registry.npmjs.org
 # enable/disable chart repo supporting
 CHARTFLAG=false
