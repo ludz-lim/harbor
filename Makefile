@@ -82,6 +82,13 @@ HTTPPROXY=
 # BUILDBIN must be set to true as of now (Dec. 8, 2020) for us to use fargate
 # When BUILDBIN is set to true, it uses a pre-existing photon image which uses an AWS SDK that doesn't support AWS FARGATE
 BUILDBIN=true
+
+# Add extra builder flag, to make sure the component use the same AWS SDK as 
+# ./src/vendor/github.com/aws/aws-sdk-go
+# This also make sure that S3 storage driver for docker is the same as the core components
+# Set it to empty if your want to original behavior
+COMPONENTS_EXTRA_BUILDER_FLAGS="--use-same-aws-sdk"
+
 NPM_REGISTRY=https://registry.npmjs.org
 # enable/disable chart repo supporting
 CHARTFLAG=false
@@ -416,7 +423,8 @@ build:
 	 -e CHARTMUSEUMVERSION=$(CHARTMUSEUMVERSION) -e CHARTMUSEUM_SRC_TAG=$(CHARTMUSEUM_SRC_TAG) -e DOCKERIMAGENAME_CHART_SERVER=$(DOCKERIMAGENAME_CHART_SERVER) \
 	 -e NPM_REGISTRY=$(NPM_REGISTRY) -e BASEIMAGETAG=$(BASEIMAGETAG) -e BASEIMAGENAMESPACE=$(BASEIMAGENAMESPACE) \
 	 -e CLAIRURL=$(CLAIRURL) -e CHARTURL=$(CHARTURL) -e NORARYURL=$(NORARYURL) -e REGISTRYURL=$(REGISTRYURL) -e CLAIR_ADAPTER_DOWNLOAD_URL=$(CLAIR_ADAPTER_DOWNLOAD_URL) \
-	 -e TRIVY_DOWNLOAD_URL=$(TRIVY_DOWNLOAD_URL) -e TRIVY_ADAPTER_DOWNLOAD_URL=$(TRIVY_ADAPTER_DOWNLOAD_URL)
+	 -e TRIVY_DOWNLOAD_URL=$(TRIVY_DOWNLOAD_URL) -e TRIVY_ADAPTER_DOWNLOAD_URL=$(TRIVY_ADAPTER_DOWNLOAD_URL) \
+	 -e COMPONENTS_EXTRA_BUILDER_FLAGS=$(COMPONENTS_EXTRA_BUILDER_FLAGS)
 
 build_standalone_db_migrator: compile_standalone_db_migrator
 	make -f $(MAKEFILEPATH_PHOTON)/Makefile _build_standalone_db_migrator -e BASEIMAGETAG=$(BASEIMAGETAG) -e VERSIONTAG=$(VERSIONTAG)
