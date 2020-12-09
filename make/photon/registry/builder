@@ -66,6 +66,8 @@ cd $cur
 if [ "$use_same_aws_sdk" = "true" ]
 then
 
+    echo "Building using the same AWS SDK as the core harbor components"
+
 	# copy our AWS hacks
 	cp ../../../src/vendor/github.com/docker/distribution/registry/storage/driver/s3-aws/s3.go $TEMP/registry/storage/driver/s3-aws/s3.go
 
