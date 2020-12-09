@@ -76,7 +76,7 @@ github.com/astaxie/beego/session/redis_sentinel
 github.com/astaxie/beego/toolbox
 github.com/astaxie/beego/utils
 github.com/astaxie/beego/validation
-# github.com/aws/aws-sdk-go v1.32.5
+# github.com/aws/aws-sdk-go v1.35.35
 ## explicit
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/arn
