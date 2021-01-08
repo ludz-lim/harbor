@@ -352,6 +352,11 @@ func (a *projectAPI) HeadProject(ctx context.Context, params operation.HeadProje
 }
 
 func (a *projectAPI) ListProjects(ctx context.Context, params operation.ListProjectsParams) middleware.Responder {
+	// Only allow authenticated user to list projects
+	if err := a.RequireAuthenticated(ctx); err != nil {
+		return a.SendError(ctx, err)
+	}
+
 	query := q.New(q.KeyWords{})
 	query.Sorting = "name"
 	query.PageNumber = *params.Page
