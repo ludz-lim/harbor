@@ -58,6 +58,12 @@ func (s *SearchAPI) Get() {
 	}
 
 	if !s.SecurityCtx.IsSysAdmin() {
+		cur := config.DisableAnonymous()
+		if !s.SecurityCtx.IsAuthenticated() && cur {
+			// return empty if anonymos access is disabled
+			return
+		}
+
 		if sc, ok := s.SecurityCtx.(*local.SecurityContext); ok && sc.IsAuthenticated() {
 			user := sc.User()
 			member := &project.MemberQuery{

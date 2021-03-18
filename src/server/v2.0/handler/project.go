@@ -361,6 +361,11 @@ func (a *projectAPI) HeadProject(ctx context.Context, params operation.HeadProje
 }
 
 func (a *projectAPI) ListProjects(ctx context.Context, params operation.ListProjectsParams) middleware.Responder {
+	// Only allow authenticated user to list projects
+	if err := a.RequireAuthenticated(ctx); err != nil {
+		return a.SendError(ctx, err)
+	}
+	
 	query := q.New(q.KeyWords{})
 	query.Sorting = "name"
 	query.PageNumber = *params.Page
@@ -406,7 +411,10 @@ func (a *projectAPI) ListProjects(ctx context.Context, params operation.ListProj
 			return operation.NewListProjectsOK().WithXTotalCount(0).WithPayload([]*models.Project{})
 		}
 		// force to return public projects for anonymous
-		query.Keywords["public"] = true
+		cur := config.DisableAnonymous()
+		if !cur {
+			query.Keywords["public"] = true
+		}
 	}
 
 	total, err := a.projectCtl.Count(ctx, query)

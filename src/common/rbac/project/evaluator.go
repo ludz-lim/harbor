@@ -24,6 +24,7 @@ import (
 	"github.com/goharbor/harbor/src/pkg/permission/evaluator/namespace"
 	"github.com/goharbor/harbor/src/pkg/permission/evaluator/rbac"
 	"github.com/goharbor/harbor/src/pkg/permission/types"
+	"github.com/goharbor/harbor/src/core/config"
 )
 
 // RBACUserBuilder builder to make types.RBACUser for the project
@@ -32,7 +33,7 @@ type RBACUserBuilder func(context.Context, *models.Project) types.RBACUser
 // NewBuilderForUser create a builder for the local user
 func NewBuilderForUser(user *models.User, ctl project.Controller) RBACUserBuilder {
 	return func(ctx context.Context, p *models.Project) types.RBACUser {
-		if user == nil {
+		if user == nil && !config.DisableAnonymous() {
 			// anonymous access
 			return &rbacUser{
 				project:  p,

@@ -119,6 +119,7 @@ const (
 	UserMember                        = "u"
 	GroupMember                       = "g"
 	ReadOnly                          = "read_only"
+	DisableAnonymous                  = "disable_anonymous"
 	TrivyAdapterURL                   = "trivy_adapter_url"
 	NotaryURL                         = "notary_url"
 	DefaultCoreEndpoint               = "http://core:8080"

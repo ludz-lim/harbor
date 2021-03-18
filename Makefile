@@ -89,10 +89,10 @@ GEN_TLS=
 
 # version prepare
 # for docker image tag
-VERSIONTAG=dev
+VERSIONTAG=v2.2.0-hp-dev
 # for base docker image tag
 PUSHBASEIMAGE=
-BASEIMAGETAG=dev
+BASEIMAGETAG=v2.2.0
 BASEIMAGENAMESPACE=goharbor
 # for harbor package name
 PKGVERSIONTAG=dev
