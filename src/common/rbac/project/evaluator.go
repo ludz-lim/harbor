@@ -33,7 +33,7 @@ type RBACUserBuilder func(context.Context, *models.Project) types.RBACUser
 // NewBuilderForUser create a builder for the local user
 func NewBuilderForUser(user *models.User, ctl project.Controller) RBACUserBuilder {
 	return func(ctx context.Context, p *models.Project) types.RBACUser {
-		if user == nil && !config.DisableAnonymous() {
+		if user == nil {
 			// anonymous access
 			return &rbacUser{
 				project:  p,
