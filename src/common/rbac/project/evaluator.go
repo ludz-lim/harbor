@@ -24,7 +24,6 @@ import (
 	"github.com/goharbor/harbor/src/pkg/permission/evaluator/namespace"
 	"github.com/goharbor/harbor/src/pkg/permission/evaluator/rbac"
 	"github.com/goharbor/harbor/src/pkg/permission/types"
-	"github.com/goharbor/harbor/src/core/config"
 )
 
 // RBACUserBuilder builder to make types.RBACUser for the project
