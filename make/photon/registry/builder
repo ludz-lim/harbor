@@ -2,6 +2,38 @@
 
 set +e
 
+TEMP=`getopt -o a --long use-same-aws-sdk -- "$@"`
+
+#Bad arguments
+if [ $? -ne 0 ];
+then
+  exit 1
+fi
+
+eval set -- "$TEMP"
+
+use_same_aws_sdk=false
+
+
+while true
+do
+        case "$1" in
+                -a|--use-same-aws-sdk)
+                        use_same_aws_sdk=true
+                        shift
+                        ;;
+                --)
+                        shift
+                        break
+                        ;;
+                *)
+                        echo "internal error"
+                        exit 1
+                        ;;
+        esac
+done
+
+
 if [ -z $1 ]; then
   error "Please set the 'version' variable"
   exit 1
@@ -30,6 +62,35 @@ git apply 2879.patch
 git apply $cur/redis.patch
 cd $cur
 
+
+if [ "$use_same_aws_sdk" = "true" ]
+then
+
+    echo "Building using the same AWS SDK as the core harbor components"
+
+	# copy our AWS hacks
+	cp ../../../src/vendor/github.com/docker/distribution/registry/storage/driver/s3-aws/s3.go $TEMP/registry/storage/driver/s3-aws/s3.go
+
+	# Update the AWS SDK version of vendor.conf
+	sed -i -e 's/f831d5a0822a1ad72420ab18c6269bca1ddaf490/v1.35.35/' $TEMP/vendor.conf
+
+	# Update the code with latest AWS version which was already copied to harbor's vendor FOLDER
+	LATEST_AWS_SDK_DIR='../../../src/vendor/github.com/aws/aws-sdk-go'
+	OLD_DOCKER_DISTRIB_AWS_SDK_DIR="$TEMP/vendor/github.com/aws/aws-sdk-go"
+
+	# copied form https://linuxhint.com/bash_loop_list_strings/
+	declare -a StringArray=("aws" "internal" "LICENSE.txt" "NOTICE.txt" "private" "service")
+
+	# Iterate the string array using for loop
+	for val in ${StringArray[@]}
+	do
+			# Replace old AWS SDK with new ones
+			rm -Rf $OLD_DOCKER_DISTRIB_AWS_SDK_DIR/$val
+			cp -r $LATEST_AWS_SDK_DIR/$val $OLD_DOCKER_DISTRIB_AWS_SDK_DIR
+	done
+
+fi
+
 echo 'build the registry binary ...'
 cp Dockerfile.binary $TEMP
 docker build -f $TEMP/Dockerfile.binary -t registry-golang $TEMP
@@ -45,3 +106,4 @@ echo "Build registry binary success, then to build photon image..."
 cd $cur
 cp $TEMP/cmd/registry/config-example.yml config.yml
 rm -rf $TEMP
+
