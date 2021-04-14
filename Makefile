@@ -120,7 +120,7 @@ TRIVYADAPTERVERSION=v0.18.0
 CHARTMUSEUMVERSION=v0.12.0-redis
 
 # version of chartmuseum for pulling the source code
-CHARTMUSEUM_SRC_TAG=v0.12.0
+CHARTMUSEUM_SRC_TAG=hp-v0.12.0
 
 # version of registry for pulling the source code
 REGISTRY_SRC_TAG=v2.7.1

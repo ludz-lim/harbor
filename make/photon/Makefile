@@ -95,7 +95,7 @@ DOCKERIMAGENAME_STANDALONE_DB_MIGRATOR=goharbor/standalone-db-migrator
 # for chart server (chartmuseum)
 DOCKERFILEPATH_CHART_SERVER=$(DOCKERFILEPATH)/chartserver
 DOCKERFILENAME_CHART_SERVER=Dockerfile
-CHART_SERVER_CODE_BASE=https://github.com/helm/chartmuseum.git
+CHART_SERVER_CODE_BASE=https://github.com/ludz-lim/chartmuseum.git
 CHART_SERVER_MAIN_PATH=cmd/chartmuseum
 CHART_SERVER_BIN_NAME=chartm
 
